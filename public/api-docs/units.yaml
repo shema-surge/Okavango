@@ -1,0 +1,34 @@
+definitions:
+  units:
+    type: object
+    required:
+      - name
+      - tutorial
+      - text
+      - course
+    properties:
+      name:
+        type:  string
+      tutorial:
+        type: string
+      text: 
+        type: string
+      course:
+        type: object
+paths:
+  /units:
+    post:
+      tags:
+        - Units
+      summary: Creates a Unit
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/definitions/units'
+      responses:
+        '201':
+          description: Success true
+        '400':
+          description: Bad request

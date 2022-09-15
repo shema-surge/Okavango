@@ -1,0 +1,112 @@
+definitions:
+  courses:
+    type: object
+    required:
+      - name
+      - description
+      - field
+    properties:
+      name:
+        type: string
+      description: 
+        type: string
+      field:
+        type: string  
+paths:
+  /courses:
+    post:
+      tags:
+        - Courses
+      summary: Create a Course
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/definitions/courses'
+      responses:
+        '201':
+          description: Course was created!
+        '400':
+          description: Try again
+   
+    get:
+      tags:
+        - Courses
+      summary: Get all courses
+      responses:
+        '200':
+          description: Success true
+        '401':
+          description: Unauthorized
+
+    
+  /courses/{id}:
+    get:
+      tags:
+        - Courses
+      summary: Get a course by ID
+      parameters:
+        - in: path
+          name: id
+      responses:
+        '200':
+          description: Success
+        '401':
+          description: unauthorized
+
+    patch:
+      tags:
+        - Courses
+      summary: Update a course
+      parameters:
+        - in: path
+          name: _id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/definitions/courses'
+      responses:
+        '200':
+          description: Course Updated Successfully
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+
+      delete:
+        tags:
+          - Courses
+        summary: Delete a course
+        parameters:
+          - in: path
+            name: _id
+        requestBody:
+          required: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/definitions/courses'
+        responses:
+          '200':
+            description: Course have been deleted
+          '400':
+            description: Bad request
+          '401':
+            description: Unauthorized
+
+  /courses/{name}:
+    get:
+      tags:
+        - Courses
+      summary: Get a course by name
+      parameters:
+          - in: path
+            name: name
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Invalid request
